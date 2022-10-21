@@ -1,0 +1,149 @@
+CREATE TABLE IF NOT EXISTS categories (
+id BIGINT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(255) NOT NULL,
+description VARCHAR(1000) NOT NULL,
+active BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS products (
+id BIGINT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(255) NOT NULL,
+description VARCHAR(2500),
+price FLOAT NOT NULL,
+sale FLOAT,
+promo FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS categories_products (
+product_id BIGINT NOT NULL,
+category_id BIGINT NOT NULL,
+PRIMARY KEY (product_id, category_id),
+main BOOLEAN NOT NULL DEFAULT FALSE,
+CONSTRAINT category_product_product_fk FOREIGN KEY (product_id) REFERENCES products (id),
+CONSTRAINT category_product_category_fk FOREIGN KEY (category_id) REFERENCES categories (id)
+);
+
+CREATE TABLE IF NOT EXISTS attachments (
+id BIGINT PRIMARY KEY AUTO_INCREMENT,
+product_id BIGINT NOT NULL,
+filename VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS attachments_products (
+product_id BIGINT NOT NULL,
+attachment_id BIGINT NOT NULL,
+PRIMARY KEY (product_id, attachment_id),
+main BOOLEAN NOT NULL DEFAULT FALSE,
+CONSTRAINT attachment_product_product_fk FOREIGN KEY (product_id) REFERENCES products (id),
+CONSTRAINT attachment_product_attachment_fk FOREIGN KEY (attachment_id) REFERENCES attachments (id)
+);
+
+ INSERT INTO categories values(1, 'Обувь', 'Унисекс кроссовки и ботинки');
+ INSERT INTO categories values(2, 'Рубашки', 'Унисекс рубашки от Всемирных брендов');
+ INSERT INTO categories values(3, 'Шапки', 'Унисекс рубашки от Всемирных брендов');
+ INSERT INTO categories values(4, 'Брюки', 'Чиносы, классические и спортивные брюки');
+ 
+ INSERT INTO products values(1, 'adidas Кроссовки ULTIMASHOW', 'Легкие, мягкие и удобные. Просто надеваешь и бежишь. Стандартная колодка, Шнуровка, Текстильный верх, Ощущение устойчивости, Кроссовки для бега', 3711, 0.5, 0.2);
+ INSERT INTO products values(2, 'adidas Кроссовки TERREX SWIFT', 'Трейловые кроссовки для активного отдыха в горах. Прочный верх с низким голенищем и система быстрой шнуровки обеспечивают необходимую поддержку на неровных поверхностях.', 11129, 0.3, 0.1);
+ INSERT INTO products values(3, 'adidas Кроссовки RUNFALCON 2.0', 'Надень эти кроссовки adidas и отправляйся на пробежку в парк, а затем пить кофе с друзьями. Сетчатый верх обеспечивает вентиляцию и комфорт в течение всего дня.', 4239, 0, 0.2);
+ INSERT INTO products values(4, 'Кроссовки Nike Air Max Bolt', 'СКОРОСТЬ, МЯГКОСТЬ И КОМФОРТ. Вдохновленные бегом кроссовки Nike Air Max Bolt щедро дополнены накладками, волнистыми линиями дизайна и большой видимой вставкой Air.', 10790, 0.2, 0.3);
+ INSERT INTO products values(5, 'Кроссовки Nike Venture Runner', 'ФАНТАСТИЧЕСКИЙ КОМФОРТ В СТИЛЕ 80-Х. Кроссовки Nike Venture Runner восходят к культовой модели из 80-х, которая запустила революцию в мире бега. Стиль OG дополняется амортизирующей стелькой и легким верхом из сетки.', 15000, 0.1, 0.15);
+ INSERT INTO products values(6, 'Кроссовки Nike Air Monarch IV', 'Кроссовки для занятий в зале/на каждый день Nike Air Monarch IV с легкой подошвой из материала Phylon и прочным кожаным верхом обеспечивают поддержку и амортизацию.', 7400, 0.6, 0.3);
+ INSERT INTO products values(7, 'Ботинки Kadi', 'Демисезонные ботинки из натуральной кожи К-51 можно на погоду от +18 до -7 градусов. Берцы отличается повышенной износостойкостью, устойчивы к деформации, но при этом имеют легкий вес и обладают повышенным комфортом при носке.', 5400, 0.5, 0.1);
+ INSERT INTO products values(8, 'Ботинки зимние ECCO', 'Зимние ботинки из натурального промасленного нубука ECCO ASTIR пропитаны специальным раствором ECCO HYDROMAX для сохранения водоотталкивающих свойств до 10 часов с момента намокания.', 14200, 0.1, 0.1);
+ INSERT INTO products values(9, 'Ботинки кожаные зимние DStep', 'Стильные зимние ботинки от бренда DStep изготовлены из натуральной кожи премиум класса Crazy Horse.', 8300, 0.2, 0.4);
+ INSERT INTO products values(10, 'Ботинки TSNAL', 'Особая конструкция язычка повышают практичность обуви, а насыщенный цвет натуральной кожи выделяет своего хозяина на улицах города, подчеркивая его уникальный стиль.', 5300, 0.1, 0.15);
+ INSERT INTO products values(11, 'Ботинки БУТЕКС', 'Ботинки летние/демисезонные Мангуст м.24046 сшиты из качественного велюра толщиной 1.3-1.5 мм, с водоотталкивающей пропиткой.', 5200, 0.15, 0.1);
+ INSERT INTO products values(12, 'Ботинки спортивные S-TEP', 'Черные минималистичные ботинки из натуральной кожи от российского бренда S-TEP выдержат самые суровые погодные условия.', 4700, 0.25, 0.15);
+ 
+ INSERT INTO products values(13, 'Рубашка мужская оверсайз "Kally"', 'Рубашка оверсайз "Kally" удлиненная с длинным рукавом подходит как для повседневного использования, так и для праздничных мероприятий, для танцев, фотосессий и т.д.', 2711, 0.1, 0.2);
+ INSERT INTO products values(14, 'Рубашка REVal', 'Рубашка унисекс классическая в клетку с длинным рукавом.', 1129, 0.4, 0.5);
+ INSERT INTO products values(15, 'Рубашка Homeland', 'Японские рубашки кимоно уже давно покорили сердца миллионов модников по всему миру. Ни для кого не секрет, что Япония передовой поставщик моды, да и корейские, китайские мотивы в одежде не отстают.', 4239, 0.1, 0.2);
+ INSERT INTO products values(16, 'Рубашка Envy Lab', 'Унисекс рубашка в клетку свободного (оверсайз) кроя с длинным рукавом из фланели.', 5790, 0.1, 0.3);
+ INSERT INTO products values(17, 'Рубашка SUN Street', 'Рубашка мужская оверсайз удлиненная с длинным рукавом Одежда женская Унисекс Подарок мужчине Рубашка мужская со стильным топовым принтом.', 15000, 0.1, 0.15);
+ INSERT INTO products values(18, 'Рубашка VNL', 'Базовая рубашка унисекс в стиле оверсайз.', 3400, 0.7, 0.3);
+ INSERT INTO products values(19, 'Рубашка Nouvelle Vague', 'Nouvelle Vague- Путь к твоей Безупречности! Рубашка классическая с длинным рукавом.', 2400, 0.4, 0.2);
+ INSERT INTO products values(20, 'Рубашка S.WELT', 'Давно искали новое прочтение привычного тренда? Записывайте рецепт. Берем актуальный крой оверсайз, топовый рыжий цвет и добавляем капельку фактуры.', 7200, 0.2, 0.25);
+ INSERT INTO products values(21, 'Рубашка GRANAT-TEX', 'Рубашка в клетку оверсайз незаменимая вещь в гардеробе каждого. Рубашка в клетку с капюшоном одна из самых трендовых позиций 2022 года благодаря своей универсальности.', 4300, 0.1, 0.4);
+ INSERT INTO products values(22, 'Рубашка MOSSMORE', 'Всегда актуальная фланелевая клетчатая рубашка. Теплая и невероятно мягкая из хлопковой фланели в крупную клетку - идеальный вариант для расслабленных осенних образов.', 2300, 0.2, 0.15);
+ INSERT INTO products values(23, 'Рубашка ILGA', 'Рубашка оверсайз теплая в клетку хлопковая удлиненная с длинным рукавом.', 3200, 0.25, 0.1);
+ INSERT INTO products values(24, 'Рубашка PIVOVAROFF WEAR', 'Рубашка оверсайз унисекс премиум качества из высококачественного хлопкового трикотажа. Модель с отложным воротником, заниженной линией плеча и рукавов 3/4.', 5700, 0.15, 0.25);
+ 
+ INSERT INTO products values(25, 'Шапка Nimfalida', 'Головные уборы можно точно назвать важным пазлом модного осенне-зимнего образа, о котором часто забывают.', 1711, 0.1, 0.2);
+ INSERT INTO products values(26, 'Шапка Yep', 'Шапка вязаная мужская, женская, унисекс, подростковая, бини, докера, без козырька.', 929, 0.1, 0.2);
+ INSERT INTO products values(27, 'Шапка Overcast', 'Шапка бини самая популярная и трендовая модель шапки. Шапка двойная с теплой подкладкой из мягкого флика идеально подходит на демисезон , осень , зиму и начало весны.', 1239, 0.1, 0.2);
+ INSERT INTO products values(28, 'Шапка SAPKA', 'Обязательно купите себе или в подарок нашу мужскую, женскую, детскую, унисекс шапку. Это теплая двухслойная вязаная бини с подворотом.', 2790, 0.1, 0.3);
+ INSERT INTO products values(29, 'Шапка Tezza', 'Шапка мужская и женская, тонкая двухслойная шапка, демисезонная шапка унисекс мелкой вязки придаёт ощущение комфорта.', 3000, 0.2, 0.15);
+ INSERT INTO products values(30, 'Шапка REGARZO', 'Шапка бини- это базовая вещь для мужчин и для женщин. Шапка мужская демисезонная отлично подойдет на осень, на весну, на зиму и даже на лето.', 3400, 0.7, 0.3);
+ INSERT INTO products values(31, 'Шапка One Click', 'Универсальная шапка с подворотом, хорошо облегает голову.', 2400, 0.1, 0.2);
+ INSERT INTO products values(32, 'Шапка estiloLux', 'Универсальная женская и мужская шапка, унисекс, без подкладки. Можно носить как с подворотом, так и без него.', 1200, 0.25, 0.1);
+ INSERT INTO products values(33, 'Шапка Bagner', 'Универсальная женская и мужская шапка без подкладки. Хорошо облегает голову. Можно носить как с подворотом, так и без него.', 2300, 0.15, 0.1);
+ INSERT INTO products values(34, 'Шапка DATKA', 'Стильная женская и мужская шапка унисекс, выполненная из высококачественного материала, определенно станет лучшим выбором для осени, зимы и весны.', 3300, 0.25, 0.1);
+ INSERT INTO products values(35, 'Шапка MMSTAR', 'Шапка зимняя подойдёт, как мужчинам, так и женщинам, так как не имеет размера - эластична и хорошо тянется.', 900, 0.3, 0.1);
+ INSERT INTO products values(36, 'Шапка MyLami', 'Удобная, универсальная осенняя весенняя шапка-бини базовый головной убор Вашего гардероба.', 1700, 0.2, 0.25);
+ 
+ INSERT INTO products values(37, 'Брюки MONIMON', 'Брюки сочетают стили drain, альт, гранж, худи панк, hip hop, дрейн стиль. Штаны оверсайз.', 3711, 0.1, 0.2);
+ INSERT INTO products values(38, 'Брюки Ananasino', 'Легкие, дышащие брюки в клетку тренд этого сезона.', 1929, 0.1, 0.2);
+ INSERT INTO products values(39, 'Брюки Yolo', 'Повседневные брюки джоггеры с принтом зайчики пелебой от бренда YOLO.', 3239, 0.2, 0.2);
+ INSERT INTO products values(40, 'Брюки SMENA', 'Современные брюки унисекс широкого кроя, чуть зауженные внизу из трикотажа с содержанием 80% хлопка.', 1790, 0.15, 0.35);
+ INSERT INTO products values(41, 'Брюки Garlands fashion', 'Брюки классические с высокой посадкой или брюки бананы визуально вытягивают силуэт.', 3000, 0.2, 0.15);
+ INSERT INTO products values(42, 'Брюки AGRESIF', 'Классические брюки незаменимая вещь в гардеробе. Брюки зауженные одна из самых трендовых позиций 2022 года благодаря своей универсальности.', 2400, 0.2, 0.3);
+ INSERT INTO products values(43, 'Брюки Сiяй', 'Чёрные базовые брюки - палаццо с завышенной талией. Зрительно удлинят ваш силуэт, широкие.', 3400, 0.1, 0.2);
+ INSERT INTO products values(44, 'Брюки PELVERT', ' Брюки классические сочетаются с рубашкой, свитшотом, футболкой, худи, водолазкой и голым телом.', 4200, 0.2, 0.15);
+ INSERT INTO products values(45, 'Брюки Affine', 'Брюки классические AFFINE – тренд моды 2022 года. Штаны с высокой посадкой повседневные состоят из вискозы, полиэстера и эластана, благодаря чему дышат и тянутся.', 3300, 0.1, 0.15);
+ INSERT INTO products values(46, 'Брюки AxLer', 'Зауженные классические брюки, выполнены из смесовой маломнущейся ткани. Спереди два кармана с отрезным бочком, сзади справа один прорезной карман.', 4300, 0.2, 0.1);
+ INSERT INTO products values(47, 'Брюки STENSER', 'Повседневные брюки чиносы черного цвета, изготовленные по традиционным европейским канонам.', 2900, 0.35, 0.1);
+ INSERT INTO products values(48, 'Брюки Milton', 'Повседневные мужские брюки бананы. Уникальное сочетание высокого качества и стильного фасона.', 6700, 0.25, 0.2);
+ 
+ INSERT INTO categories_products values(1, 1, true);
+ INSERT INTO categories_products values(2, 1, true);
+ INSERT INTO categories_products values(3, 1, true);
+ INSERT INTO categories_products values(4, 1, true);
+ INSERT INTO categories_products values(5, 1, true);
+ INSERT INTO categories_products values(6, 1,true);
+ INSERT INTO categories_products values(7, 1, true);
+ INSERT INTO categories_products values(8, 1, true);
+ INSERT INTO categories_products values(9, 1, true);
+ INSERT INTO categories_products values(10, 1, true);
+ INSERT INTO categories_products values(11, 1, true);
+ INSERT INTO categories_products values(12, 1, true);
+ 
+ INSERT INTO categories_products values(13, 2, true);
+ INSERT INTO categories_products values(14, 2, true);
+ INSERT INTO categories_products values(15, 2, true);
+ INSERT INTO categories_products values(16, 2, true);
+ INSERT INTO categories_products values(17, 2, true);
+ INSERT INTO categories_products values(18, 2, true);
+ INSERT INTO categories_products values(19, 2, true);
+ INSERT INTO categories_products values(20, 2, true);
+ INSERT INTO categories_products values(21, 2, true);
+ INSERT INTO categories_products values(22, 2, true);
+ INSERT INTO categories_products values(23, 2, true);
+ INSERT INTO categories_products values(24, 2, true);
+ 
+ INSERT INTO categories_products values(25, 3, true);
+ INSERT INTO categories_products values(26, 3, true);
+ INSERT INTO categories_products values(27, 3, true);
+ INSERT INTO categories_products values(28, 3, true);
+ INSERT INTO categories_products values(29, 3, true);
+ INSERT INTO categories_products values(30, 3, true);
+ INSERT INTO categories_products values(31, 3, true);
+ INSERT INTO categories_products values(32, 3, true);
+ INSERT INTO categories_products values(33, 3, true);
+ INSERT INTO categories_products values(34, 3, true);
+ INSERT INTO categories_products values(35, 3, true);
+ INSERT INTO categories_products values(36, 3, true);
+ 
+ 
+ INSERT INTO categories_products values(37, 4, true);
+ INSERT INTO categories_products values(38, 4, true);
+ INSERT INTO categories_products values(39, 4, true);
+ INSERT INTO categories_products values(40, 4, true);
+ INSERT INTO categories_products values(41, 4, true);
+ INSERT INTO categories_products values(42, 4, true);
+ INSERT INTO categories_products values(43, 4, true);
+ INSERT INTO categories_products values(44, 4, true);
+ INSERT INTO categories_products values(45, 4, true);
+ INSERT INTO categories_products values(46, 4, true);
+ INSERT INTO categories_products values(47, 4, true);
+ INSERT INTO categories_products values(48, 4, true);
